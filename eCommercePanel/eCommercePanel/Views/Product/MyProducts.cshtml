@@ -1,0 +1,44 @@
+﻿@model ProductModel
+
+<h2>Ürün Listesi</h2>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Ürün Adı</th>
+            <th>Açıklama</th>
+            <th>Fiyat</th>
+
+            <th>Stok</th>
+            <th>Kategori</th>
+            <th>Resim</th>
+            <th>İşlemler</th> 
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.Products)
+        {
+            <tr>
+                <td>@product.ProductName</td>
+                <td>@product.Description</td>
+                <td>@product.Price ₺</td>
+                <td>@product.Stock</td>
+                <td>@product.Category?.CategoryName</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(product.ImageUrl))
+                    {
+                        <img src="@product.ImageUrl" alt="resim" width="80" />
+                    }
+                    else
+                    {
+                        <span>Yok</span>
+                    }
+                </td>
+                <td>
+                    <a href="@Url.Action("EditProduct", "Product", new { id = product.ProductId })" class="btn btn-primary btn-sm">Düzenle</a>
+                    <a href="@Url.Action("DeleteProduct", "Product", new { id = product.ProductId })" class="btn btn-danger btn-sm" onclick="return confirm('Silmek istediğinize emin misiniz?');">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,44 @@
+﻿@model ProductModel
+@{
+    ViewData["Title"] = "Add Products";
+}
+
+<h1>Add Product</h1>
+
+<form action="@Url.Action("AddProduct","Product")" method="post">
+    <div class="form-group">
+        <label for="ProductName">Product Name</label>
+        <input type="text" id="ProductName" name="ProductName" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="Description">Ürün Açıklaması</label>
+        <textarea id="Description" name="ProductDesc" class="form-control"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="Price">Price</label>
+        <input type="number" step="0.01" id="Price" name="Price" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="Stock">Stock</label>
+        <input type="number" id="Stock" name="Stock" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="CategoryID">Category</label>
+        <select id="CategoryID" name="CategoryID" class="form-control">
+            @foreach (var category in Model.Categories)
+            {
+                <option value="@category.CategoryId">@category.CategoryName</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="ImageUrl">Image URL</label>
+        <input type="text" id="ImageUrl" name="ImageUrl" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
